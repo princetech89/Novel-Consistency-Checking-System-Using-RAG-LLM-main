@@ -1,7 +1,15 @@
 from openai import OpenAI
 import os
+from dotenv import load_dotenv
 
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY is not set in environment variables")
+
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 def classify_consistency(claim, evidence):
     prompt = f"""

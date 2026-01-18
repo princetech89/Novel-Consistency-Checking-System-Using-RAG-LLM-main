@@ -1,19 +1,30 @@
 from pinecone import Pinecone, ServerlessSpec
 import os, uuid
+from dotenv import load_dotenv
 
-pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
-index_name = os.environ["INDEX_NAME"]
+load_dotenv()
+
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+INDEX_NAME = os.getenv("INDEX_NAME")
+
+if not PINECONE_API_KEY:
+    raise ValueError("PINECONE_API_KEY is not set in environment variables")
+
+if not INDEX_NAME:
+    raise ValueError("INDEX_NAME is not set in environment variables")
+
+pc = Pinecone(api_key=PINECONE_API_KEY)
 
 # Create index if not exists
-if index_name not in pc.list_indexes().names():
+if INDEX_NAME not in pc.list_indexes().names():
     pc.create_index(
-        name=index_name,
-        dimension=3072,
+        name=INDEX_NAME,
+        dimension=3072, #TODO: Dimention should be dynamic based on the model
         metric="cosine",
         spec=ServerlessSpec(cloud="AWS", region="us-east-1")
     )
 
-index = pc.Index(index_name)
+index = pc.Index(INDEX_NAME)
 
 def store_chunks(chunks, embed_fn):
     batch_size = 100  # Process chunks in batches of 100

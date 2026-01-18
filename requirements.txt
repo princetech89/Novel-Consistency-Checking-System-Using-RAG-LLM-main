@@ -2,3 +2,4 @@ pinecone
 streamlit
 sentence-transformers
 openai
+python-dotenv
