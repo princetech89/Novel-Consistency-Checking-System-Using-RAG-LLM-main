@@ -14,14 +14,12 @@ This project is a system for checking the consistency of claims against a large 
 
     *   `OPENAI_API_KEY`: Your OpenAI API key.
     *   `PINECONE_API_KEY`: Your Pinecone API key.
-    *   `PINECONE_ENV`: The Pinecone environment you are using.
     *   `INDEX_NAME`: The name of the Pinecone index you want to use.
 
     For example, in a bash shell, you would do:
     ```bash
     export OPENAI_API_KEY="your-openai-api-key"
     export PINECONE_API_KEY="your-pinecone-api-key"
-    export PINECONE_ENV="your-pinecone-env"
     export INDEX_NAME="your-index-name"
     ```
 

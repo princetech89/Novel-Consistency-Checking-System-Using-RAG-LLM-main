@@ -1,4 +1,4 @@
-pinecone-client
+pinecone
 streamlit
 sentence-transformers
 openai
